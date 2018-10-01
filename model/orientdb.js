@@ -8,6 +8,6 @@ const server = OrientDB({
    password:   config.password
 });
 
-const db = server.use('o3');
+//const db = server.use('o3');
 
-module.exports = db;
+module.exports = server;
