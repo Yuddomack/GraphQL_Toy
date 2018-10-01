@@ -38,23 +38,33 @@ app.post('/join',function(req,res){
       res.render('./index');
     })
     .catch(e => {
-      console.log(e.name+':'+e.message)
+      console.log(e.name+':'+e.message);
       res.render('./error', {name: e.name, message: e.message});
     });
 });
 
-
-
-
-
-
-
 app.get('/login',function(req,res){
+  if(req.session.user_id) return res.redirect('./board');
+
   res.render('./login');
 });
 
+app.post('/login',function(req,res){
+  dao.login.doLogin(req.body.id, req.body.pwd)
+    .then(result => {
+      if(result !== 200) throw { name:'invalid information', message:'please check id, password' };
+
+      req.session.user_id = req.body.id;
+      req.session.save(() => res.redirect('./board'));
+    })
+    .catch(e => {
+      console.log(e.name+':'+e.message);
+      res.render('./error', {name: e.name, message: e.message});
+    })
+});
+
 app.get('/board',function(req,res){
-  res.render('./board');
+  res.render('./board', {user_id:req.session.user_id});
 });
 
 app.listen(3000,function(){
