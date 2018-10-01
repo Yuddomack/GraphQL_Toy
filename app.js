@@ -25,6 +25,22 @@ app.get('/',function(req,res){
   res.render('./index');
 });
 
+app.get('/join',function(req,res){
+  res.render('./join');
+});
+
+app.post('/join',function(req,res){
+  //res.render('./join');
+});
+
+app.get('/login',function(req,res){
+  res.render('./login');
+});
+
+app.get('/board',function(req,res){
+  res.render('./board');
+});
+
 app.listen(3000,function(){
   console.log(`Connect 3000 port!`)
 });
