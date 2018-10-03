@@ -3,7 +3,7 @@ module.exports = {
     const conn = require('../model/orientdb');
 
     return await conn.query(sql, params);
-  }
+  },
   join:require('./join'),
   login:require('./login'),
 };
