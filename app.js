@@ -4,9 +4,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const graphqlHTTP = require('express-graphql');
-const Graphql = require('graphql');
 
 const dao = require('./business/dao');
+const graphql_schema = require('./graphql/schema')(dao);
 
 const app = express();
 app.use(express.static('public')); // public
@@ -26,13 +26,13 @@ app.engine('html', require('ejs').renderFile);
 /* graphql */
 app.use('/graphql', graphqlHTTP(request => {
   return {
-    schema: schema,
+    schema: graphql_schema,
     context: request.session,
     graphiql: true,
   }
 }));
 
-
+/* route */
 app.get('/',function(req,res){
   res.render('./index');
 });
@@ -84,7 +84,7 @@ app.get('/test',function(req,res){
     params: {
       rid: req.session.rid
     }
-  }).then(result => console.log(result));
+  }).then(result => console.log(result[0]['@rid'])); // check orient's metadata, properties
 })
 
 app.listen(3000,function(){
