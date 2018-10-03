@@ -33,7 +33,7 @@ module.exports = function(){
       */
       //console.log(result[0]['@rid']);
 
-      return (result.length > 0) ? 200 : 400; // code 200
+      return (result.length > 0) ? {code : 200} : {code : 400}; // code 200
     }
 
     return {

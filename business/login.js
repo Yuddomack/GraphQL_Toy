@@ -10,7 +10,7 @@ module.exports = function(){
         }
       });
 
-      return (result.length > 0) ? 200 : 400; // code 200
+      return (result.length > 0) ? {code : 200, rid : result[0]['@rid']} : {code : 400}; // code 200
     }
 
     return {
@@ -18,6 +18,15 @@ module.exports = function(){
       doLogin: doLogin,
     };
 }();
+
+/*
+[ { '@class': 'users',
+  '@type': 'd',
+  id: 'qwer',
+  pwd: 'qwer',
+  '@rid': RecordID { cluster: 35, position: 0 },
+  '@version': 1 } ]
+*/
 
 
 // context에 req.body에 관한 내용이 나오는지.
