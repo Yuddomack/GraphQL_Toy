@@ -3,6 +3,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const graphqlHTTP = require('express-graphql');
+const Graphql = require('graphql');
 
 const dao = require('./business/dao');
 
@@ -20,6 +22,15 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
+
+/* graphql */
+app.use('/graphql', graphqlHTTP(request => {
+  return {
+    schema: schema,
+    context: request.session,
+    graphiql: true,
+  }
+}));
 
 
 app.get('/',function(req,res){
