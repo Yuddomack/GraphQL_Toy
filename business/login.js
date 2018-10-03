@@ -10,7 +10,7 @@ module.exports = function(){
         }
       });
 
-      console.log(result[0]['rid']);
+      //console.log(result[0]['rid']);
 
       return (result.length > 0) ? {code : 200, rid : result[0]['rid']} : {code : 400}; // code 200
     }
