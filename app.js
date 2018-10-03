@@ -79,6 +79,14 @@ app.get('/board',function(req,res){
   res.render('./board', {user_id:req.session.user_id});
 });
 
+app.get('/test',function(req,res){
+  dao.query('select * from users where @rid = :rid', {
+    params: {
+      rid: req.session.rid
+    }
+  }).then(result => console.log(result));
+})
+
 app.listen(3000,function(){
   console.log(`Connect 3000 port!`)
 });
