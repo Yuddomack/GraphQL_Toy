@@ -44,7 +44,7 @@ app.get('/join',function(req,res){
 app.post('/join',function(req,res){
   dao.join.joinUser(req.body.id, req.body.pwd)
     .then(result => {
-      if(result !== 200) throw { name:'join failed', message:'something wrong' };
+      if(result.code !== 200) throw { name:'join failed', message:'something wrong' };
 
       res.render('./index');
     })
@@ -63,8 +63,9 @@ app.get('/login',function(req,res){
 app.post('/login',function(req,res){
   dao.login.doLogin(req.body.id, req.body.pwd)
     .then(result => {
-      if(result !== 200) throw { name:'invalid information', message:'please check id, password' };
+      if(result.code !== 200) throw { name:'invalid information', message:'please check id, password' };
 
+      req.session.rid = result.rid; // user의 rid
       req.session.user_id = req.body.id;
       req.session.save(() => res.redirect('./board'));
     })
