@@ -2,7 +2,7 @@ module.exports = function(){
     const conn = require('../model/orientdb');
 
     async function doLogin(id, pwd){
-      let sql = 'select id from users where id=:id and pwd=:pwd';
+      let sql = 'select id, @rid from users where id=:id and pwd=:pwd';
       const result = await conn.query(sql, {
         params: {
           id: id,
@@ -10,7 +10,9 @@ module.exports = function(){
         }
       });
 
-      return (result.length > 0) ? {code : 200, rid : result[0]['@rid']} : {code : 400}; // code 200
+      console.log(result[0]['rid']);
+
+      return (result.length > 0) ? {code : 200, rid : result[0]['rid']} : {code : 400}; // code 200
     }
 
     return {
