@@ -18,3 +18,15 @@ module.exports = function(){
       doLogin: doLogin,
     };
 }();
+
+
+// context에 req.body에 관한 내용이 나오는지.
+// 아니면 이러한 방식으로 넘겨주면 될지
+// app.use('/graphql', graphqlHTTP(request => {
+//   return {
+//     schema: MyGraphQLSchema,
+//     context: { startTime: Date.now() },
+//     graphiql: true,
+//     extensions
+//   };
+// }));
