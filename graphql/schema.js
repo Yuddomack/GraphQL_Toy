@@ -37,7 +37,7 @@ module.exports = function(dao){
         type: List(boardType),
         resolve: async function(_, _, session, _){
           console.log(session);
-          return await dao.ckSession(session).board.gqlGetAllContent();
+          return await dao.ckSession(session).board.gqlGetAllContent(); // 스키마의 throw는 {} 꼴로 하면 [object object]가 나옴, 그냥 메세지만 작성하면 됨
         }
       },
 
