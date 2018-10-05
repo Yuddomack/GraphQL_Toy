@@ -80,11 +80,12 @@ app.get('/board',function(req,res){
 });
 
 app.get('/test',function(req,res){
-  dao.query('select * from users where @rid = :rid', {
+  //'select * from users where @rid = :rid'
+  dao.query('select * from board fetchplan *:1', {
     params: {
       rid: req.session.rid
     }
-  }).then(result => console.log(result[0]['@rid'])); // check orient's metadata, properties
+  }).then(result => console.log(result)); // check orient's metadata, properties
 })
 
 app.listen(3000,function(){
