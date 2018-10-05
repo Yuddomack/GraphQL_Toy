@@ -5,6 +5,46 @@
   </head>
   <body>
     <h1>Board</h1>
-    <p>hi <%= user_id %></p>
+    <p>hi <%= user_id || "unknown" %></p>
+    <div id="root">
+
+    </div>
+    <div class="footer">
+
+    </div>
   </body>
+
+  <script>
+    window.onload = function(){
+      const header = {
+        method: "GET",
+        headers: {
+          'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'include'
+      };
+
+      const query = encodeURIComponent(`{
+        allContents {
+          title
+          content
+          author {
+            id
+          }
+        }
+      }`);
+
+
+      fetch('http://192.168.219.189:3000/graphql?query='+query)
+      .then(res => res.json())
+      .then(resJson => {
+        if(resJson.error) throw {name:"error", message:"graphql api error"}
+
+        console.log(resJson);
+      })
+      .catch(e => console.log(e));
+    }
+  </script>
 </html>
