@@ -14,10 +14,7 @@ module.exports = function(dao){
     fields: {
       //'@rid': { type: String },
       id: { type: String },
-      pwd: { type: String },
-      resolve: function(obj, args, context, info){
-        console.log(obj);
-      }
+      pwd: { type: String }
     }
   });
 
