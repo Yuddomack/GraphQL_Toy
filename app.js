@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const graphqlHTTP = require('express-graphql');
+const cors = require('cors');
 
 const dao = require('./business/dao');
 const graphql_schema = require('./graphql/schema')(dao);
@@ -17,6 +18,13 @@ app.use(session({
 })); // session
 app.use(bodyParser.json()); // body parser
 app.use(bodyParser.urlencoded({extended:false}));
+
+/* cors */
+const corsOptions = {
+    origin: true,
+    credentials: true
+};
+app.use(cors(corsOptions));
 
 /* ejs */
 app.set('views', __dirname + '/views');
