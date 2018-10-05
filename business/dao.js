@@ -5,7 +5,7 @@ module.exports = {
     return await conn.query(sql, params);
   },
   ckSession: function(session){
-    if(!session.rid) throw {name:'invalid session', message:'please login again'};
+    if(!session.rid) throw "invalid session";
 
     return this;
   },
